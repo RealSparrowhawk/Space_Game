@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 
 public class SpaceMain {
     public static void main(String[] args) {
@@ -12,10 +13,12 @@ public class SpaceMain {
         new SpaceMain();
     }
 
+    //Graphics related
     int panW = 900;
     int panH = 900;
-
     DrawingPanel panel;
+
+    SpaceShip player = new SpaceShip();
     SpaceMain() {
         panel = new DrawingPanel();
         JFrame window = new JFrame("Salamder 2");
@@ -30,6 +33,13 @@ public class SpaceMain {
         DrawingPanel() {
             this.setBackground(Color.BLACK);
             this.setPreferredSize(new Dimension(panW, panH));
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.setColor(player.clr);
+            g.fillRect(player.x, player.y, player.width, player.height);
         }
     }
 }

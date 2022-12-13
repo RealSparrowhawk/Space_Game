@@ -5,6 +5,7 @@ import java.awt.Color;
 
 public class SpaceShip extends Rectangle {
     //Notes: x,y,width,height (all ints) come from Rectangle
+
     double xx, yy; //Double version of x,y for precise moving
     double vx = 3.5;
     double vy = 3.5;
