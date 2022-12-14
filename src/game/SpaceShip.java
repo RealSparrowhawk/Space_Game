@@ -20,4 +20,27 @@ public class SpaceShip extends Rectangle {
         width = 50;
         height = 30;
     }
+
+    void moveShit (int key) {
+        switch (key) {
+            case 'W':
+            case 38:
+                yy -= vy;
+                break;
+            case 'S':
+            case 40:
+                yy += vy;
+                break;
+            case 'A':
+            case 37:
+                xx -= vx;
+                break;
+            case 'D':
+            case 39:
+                xx += vx;
+                break;
+        }
+        x = (int)xx;
+        y = (int)yy;
+    }
 }
