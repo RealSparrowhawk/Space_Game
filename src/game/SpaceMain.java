@@ -32,11 +32,11 @@ public class SpaceMain {
         //timer.start();
     }
 
-    class DrawingPanel extends JPanel implements KeyListener {
+    class DrawingPanel extends JPanel {
         DrawingPanel() {
             this.setBackground(Color.BLACK);
             this.setPreferredSize(new Dimension(panW, panH));
-            this.addKeyListener(this);
+            this.addKeyListener(new BetterKeyListener());
             this.setFocusable(true); //needed for JPanel & keys. Won't detect keys if not true
         }
 
@@ -47,20 +47,28 @@ public class SpaceMain {
             g.fillRect(player.x, player.y, player.width, player.height);
         }
 
-        @Override
-        public void keyTyped(KeyEvent e) {
-        }
+    } //End of DrawingPanel class
 
+    //Since this is a general class, I'm not going to have it move the player etc.
+    //We'll have to use a Timer to check if the keys are pressed.
+    class BetterKeyListener implements KeyListener {
+        private boolean keysDown[] = new boolean[256];
+
+        public boolean isKeyDown(int key) {
+            return keysDown[key];
+        }
         @Override
         public void keyPressed(KeyEvent e) {
-            player.moveShit(e.getKeyCode());
-
-            this.repaint();
+            if (e.getKeyCode() < 256) keysDown[e.getKeyCode()] = true;
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
+            if (e.getKeyCode() < 256) keysDown[e.getKeyCode()] = false;
+        }
 
+        @Override
+        public void keyTyped(KeyEvent e) {
         }
     }
 }
